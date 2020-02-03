@@ -14,10 +14,16 @@
 
     <main class="container">
         <div class="row mt-4">
-            <div class="col-5 border rounded">
+            <div class="list-group-flush col-5 border rounded">
              <h3>Usuários</h3>
-
-             
+             <div class="d-flex justify-contents">
+                 <li class="list-group-item"> </li>
+                 <li class="list-group-item"> 
+                 <button type="submit" class="btn btn-info btn-block">Editar</button>
+                 <button type="submit" class="btn btn-danger btn-block">Excluir</button>
+                </li>
+             </div>
+             <li class="list-group-item"> </li>
             </div>
             <div class="col-7">
             <h3>Adicionar usuários  </h3>

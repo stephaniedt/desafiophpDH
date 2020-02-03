@@ -11,7 +11,10 @@
 </head>
 
 <body>
-    <?php require_once('includes/header.php'); ?>
+
+    <?php 
+    session_start();
+    require_once('includes/header.php'); ?>
 
     <main>
 <div class="container col-4 my-4">
@@ -25,7 +28,7 @@
             <label for="inputPassword1">Senha</label>
             <input type="password" class="form-control" id="inputPassword1" name="senha">
         </div>
-            <a href="#" class="d-block mb-2"> <small>Ainda não sou cadastrado</small></a>
+            <a href="cadastro.php" class="d-block mb-2"> <small>Ainda não sou cadastrado</small></a>
         <div class="form-group">
         <button type="submit" class="btn btn-info btn-block" name="btn-login">Login</button>    
         </div>

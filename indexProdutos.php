@@ -9,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+    
 <?php require_once('includes/header.php'); ?>
 
 <main class="container mt-4">
@@ -30,10 +31,9 @@
                     <td>Descrição produto 1</td>
                     <td>R$ 10,00</td>
                     <td> 
-                        <!-- COMO FAZER O LINK DOS BOTOES A PAGINA REFERENTE -->
-                        <form action="" method = ></form>
-                         <button type="button" class="btn btn-info" name="edit-prod">Editar</button>
-                         <button type="button" class="btn btn-danger" name="delete-prod">Excluir</button>
+                        
+                         <a href="editProduto.php" class="btn btn-info" name="edit-prod">Editar</a>
+                         <a href="editProduto.php" class="btn btn-danger" name="delete-prod">Excluir</a>
                     </td>
                 </tr>
             </tbody>

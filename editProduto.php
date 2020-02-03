@@ -9,6 +9,14 @@
     <title>Editar produto</title>
 </head>
 <body>
+    <?php require('includes/header.php') ?>
+
+    <main class="container">
+
+
+
+    
+    </main>
     
 
 <?php require_once('includes/scriptlink.php')?>
