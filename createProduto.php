@@ -14,30 +14,61 @@
     <?php require_once('includes/header.php'); ?>
 
     <main class="container">
+
+        <?php
+
+
+        if (isset($_POST['prodAdd'])) {
+            $erros = array();
+            $valor = $_POST['prodValor'];
+            $nome = $_POST['prodNome'];
+            $_POST['prodImg'];
+
+            if (empty($nome)) {
+                $erros[] = "O campo nome é obrigatório";
+            }
+            if (!is_numeric($valor)) {
+                $erros[] = "O preço deve ser um valor numérico";
+            }
+
+            if (empty($img)) {
+                $erros[] = "Insira a imagem do produto, ela é obrigatória.";
+            }
+
+            if (!empty($erros)) {
+                foreach ($erros as $erro) {
+                    echo "<li> $erro </li>";
+                }
+            }
+        }
+
+
+
+        ?>
         <div class="mt-3">
 
             <h3>Adicionar produto</h3>
-            <form action="./indexProdutos.php"  method="post">
+            <form action="" method="post">
                 <div class="row">
                     <div class="col">
                         <span>Nome</span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="prodNome">
                     </div>
                     <div class="col">
                         <span>Preço</span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="prodValor">
                     </div>
                 </div>
                 <div class="form-group mt-1">
                     <span>Descrição</span>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="prodInfo"></textarea>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
+                    <input type="file" class="custom-file-input" id="customFile" name="prodImg">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-info btn-block mt-2" name="add-prod">Adicionar</button>
+                    <button type="submit" class="btn btn-info btn-block mt-2" name="prodAdd">Adicionar</button>
                 </div>
             </form>
         </div>
