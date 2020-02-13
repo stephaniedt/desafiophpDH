@@ -3,7 +3,7 @@
 
     <a class="navbar-brand text-white" href="#"> < Desafio PHP /></a>
 
-    <!--<//?php// if (isset($_POST['btn-login'])) : ?>// -->
+    <!--<?php if (isset($_SESSION['email'])) : ?> -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -24,7 +24,7 @@
           </li>
         </ul>
       </div>
-    <!-- <//?php endif;?> -->
+    <!-- <?php endif;?> -->
     </ul>
   </div>
 </nav>

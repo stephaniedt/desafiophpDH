@@ -12,14 +12,12 @@
 
 <body>
 
-    <?php 
-    session_start();
-    require_once('includes/header.php'); ?>
+    <?php require_once('includes/header.php'); ?>
 
     <main>
 <div class="container col-4 my-4">
 
-    <form action="" method="POST">
+    <form action="validLogin.php" method="POST">
         <div class="form-group">
             <label for="inputEmail1">Email</label>
             <input type="email" class="form-control" id="inputEmail1" name="email" placeholder="E-mail" required>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,45 +12,53 @@
 </head>
 
 <body>
-    <?php require_once('includes/header.php'); ?>
+    <?php 
+    session_start();
+    require_once('includes/header.php'); ?>
 
     <main class="container">
-
-        <?php
-
-
-        if (isset($_POST['prodAdd'])) {
-            $erros = array();
-            $valor = $_POST['prodValor'];
-            $nome = $_POST['prodNome'];
-            $_POST['prodImg'];
-
-            if (empty($nome)) {
-                $erros[] = "O campo nome é obrigatório";
-            }
-            if (!is_numeric($valor)) {
-                $erros[] = "O preço deve ser um valor numérico";
-            }
-
-            if (empty($img)) {
-                $erros[] = "Insira a imagem do produto, ela é obrigatória.";
-            }
-
-            if (!empty($erros)) {
-                foreach ($erros as $erro) {
-                    echo "<li> $erro </li>";
-                }
-            }
-        }
-
-
-
-        ?>
         <div class="mt-3">
 
             <h3>Adicionar produto</h3>
+<?php
+if ($_POST) {
+    $erros = array();
+    $valor = $_POST['prodValor'];
+    $nome = $_POST['prodNome'];
+    $img = $_POST['prodImg'];
+
+    if (empty($nome)) {
+        $erros[] = "O campo nome é obrigatório";
+    }
+    if (!is_numeric($valor)) {
+        $erros[] = "O preço deve ser um valor numérico";
+    }
+
+    if (empty($img)) {
+        $erros[] = "Insira a imagem do produto, ela é obrigatória.";
+    }
+
+    if (!empty($erros)) {
+        foreach ($erros as $erro) {
+            echo "<li style = 'color: #FF0000'> $erro </li>";
+        }
+    }
+    if (!empty($nome) and !empty($img) and !empty($valor)) {
+        $produto = $_POST;
+        fopen('produtos.json', 'a+');
+        $produtosjson = file_get_contents('produtos.json');
+        $produtosarray = json_decode($produtosjson, true);
+        $produtosarray[] = $produto;
+        $contentjson = json_encode($produtosarray);
+        file_put_contents('produtos.json', $contentjson);
+    }
+}
+
+
+?>
             <form action="" method="post">
                 <div class="row">
+                    <input type="hidden" name="id" value="">
                     <div class="col">
                         <span>Nome</span>
                         <input type="text" class="form-control" name="prodNome">
@@ -68,7 +77,7 @@
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-info btn-block mt-2" name="prodAdd">Adicionar</button>
+                    <button type="submit" class="btn btn-info btn-block mt-2">Adicionar</button>
                 </div>
             </form>
         </div>
