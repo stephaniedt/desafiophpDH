@@ -76,24 +76,20 @@ function salvaProduto($produto)
             <?php
 
             if ($_POST) {
-                $erros = array();
+               
                 $valor = $_POST['prodValor'];
                 $nome = $_POST['prodNome'];
                 $img = $_FILES['prodImg']['name'];
-
-               
                 $erros = validaProduto($nome, $valor, $img);
 
                 if (!empty($erros)) {
                     foreach ($erros as $erro) {
                         echo "<li style = 'color: #FF0000'> $erro </li>";
                     }
-                }
+                } else {
 
-                if (empty($erros)) {
                     $produto = $_POST;
                     salvaProduto($produto);
-
                     header('Location: indexProdutos.php');
                 }
             }

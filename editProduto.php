@@ -47,11 +47,8 @@
         $valor = $_POST['prodValor'];
         $nome = $_POST['prodNome'];
         $info = $_POST['prodInfo'];
-        
         $erros = validaProduto($nome, $valor);
 
-        
-        
         if(isset($_FILES['prodImg']['name'])) {
 
             $img = date("ymdHis").'_'.$_FILES['prodImg']['name'];
@@ -60,6 +57,7 @@
             move_uploaded_file($imgfile, $caminho);
         }
         else {
+            
             $img = $prod['prodImg'];
         } 
 
