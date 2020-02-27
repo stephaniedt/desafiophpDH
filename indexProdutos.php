@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,22 @@
 
     <title>Home</title>
 </head>
-<body>
-    
-<?php 
-session_start();
-require_once('includes/header.php'); ?>
 
-<main class="container mt-4">
+<body>
+
+    <?php
+    session_start();
+    require_once('includes/header.php');
+
+    function getProdutos() {
+        
+        return json_decode(file_get_contents('produtos.json'), true);
+    }
+
+    $produtosarray = getProdutos();
+    ?>
+
+    <main class="container mt-4">
         <h3>Lista de produtos</h3>
         <table class="table">
             <thead class="thead-dark">
@@ -27,21 +37,25 @@ require_once('includes/header.php'); ?>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Produto 1</td>
-                    <td>Descrição produto 1</td>
-                    <td>R$ 10,00</td>
-                    <td> 
-                        
-                         <a href="editProduto.php" class="btn btn-info" name="edit-prod">Editar</a>
-                         <a href="editProduto.php" class="btn btn-danger" name="delete-prod">Excluir</a>
-                    </td>
-                </tr>
+                <?php if ($produtosarray) {
+                    foreach ($produtosarray as $prod) : ?>
+                        <tr>
+                            <th scope="row"> <?php echo $prod['id']; ?></th>
+                            <td><?php echo $prod['prodNome']; ?></td>
+                            <td><?php echo $prod['prodInfo']; ?></td>
+                            <td><?php echo 'R$ ' . number_format($prod['prodValor'], 2, ',', '.'); ?></td>
+                            <td>
+                                <a href="editProduto.php?id=<?php echo $prod['id'] ?>" class="btn btn-info" name="edit-prod">Editar</a>
+                                <a href="deleteProduto.php?id=<?php echo $prod['id'] ?>" class="btn btn-danger" name="delete-prod">Excluir</a>
+                            </td>
+                        </tr>
+                <?php endforeach;
+                } ?>
             </tbody>
     </main>
 
     <?php require_once('includes/scriptlink.php') ?>
 
 </body>
+
 </html>

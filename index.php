@@ -26,7 +26,7 @@
             <label for="inputPassword1">Senha</label>
             <input type="password" class="form-control" id="inputPassword1" name="senha">
         </div>
-            <a href="cadastro.php" class="d-block mb-2"> <small>Ainda não sou cadastrado</small></a>
+            <a href="createUsuario.php" class="d-block mb-2"> <small>Ainda não sou cadastrado</small></a>
         <div class="form-group">
         <button type="submit" class="btn btn-info btn-block" name="btn-login">Login</button>    
         </div>

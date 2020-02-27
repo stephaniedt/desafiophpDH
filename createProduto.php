@@ -1,3 +1,60 @@
+<?php
+session_start();
+require_once('includes/header.php');
+
+function validaProduto($nome, $valor, $img)
+{
+    $erros = [];
+    if (empty($nome)) {
+        $erros[] = "O campo nome é obrigatório";
+    }
+    if (!is_numeric($valor)) {
+        $erros[] = "O preço deve ser um valor numérico";
+    }
+
+    if (!$img) {
+        $erros[] = "Insira a imagem do produto, ela é obrigatória.";
+    }
+    return $erros;
+}
+
+
+function definirID($produtosarray)
+{
+    $posicao = (count($produtosarray) - 1);
+    if ($posicao >= 0) {
+        $ultimo_id = $produtosarray[$posicao]['id'];
+        return $ultimo_id + 1;
+    } else {
+        return 1;
+    }
+}
+
+function getProdutos() {
+    
+      return json_decode(file_get_contents('produtos.json'), true);
+
+
+}
+
+
+function salvaProduto($produto)
+{
+    fopen('produtos.json', 'a+');
+    $produtosarray = getProdutos();
+    $produto['id'] = definirID($produtosarray);
+    $produto['prodImg'] = date("ymdHis").'_'.$_FILES['prodImg']['name'];
+    $produtosarray[] = $produto;
+    $contentjson = json_encode($produtosarray);
+    file_put_contents('produtos.json', $contentjson);
+    $img = $_FILES["prodImg"]["tmp_name"];
+    $caminho = "img/".$produto['prodImg'];
+    move_uploaded_file($img, $caminho);
+
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,53 +69,39 @@
 </head>
 
 <body>
-    <?php 
-    session_start();
-    require_once('includes/header.php'); ?>
-
     <main class="container">
         <div class="mt-3">
 
             <h3>Adicionar produto</h3>
-<?php
-if ($_POST) {
-    $erros = array();
-    $valor = $_POST['prodValor'];
-    $nome = $_POST['prodNome'];
-    $img = $_POST['prodImg'];
+            <?php
 
-    if (empty($nome)) {
-        $erros[] = "O campo nome é obrigatório";
-    }
-    if (!is_numeric($valor)) {
-        $erros[] = "O preço deve ser um valor numérico";
-    }
+            if ($_POST) {
+                $erros = array();
+                $valor = $_POST['prodValor'];
+                $nome = $_POST['prodNome'];
+                $img = $_FILES['prodImg']['name'];
 
-    if (empty($img)) {
-        $erros[] = "Insira a imagem do produto, ela é obrigatória.";
-    }
+               
+                $erros = validaProduto($nome, $valor, $img);
 
-    if (!empty($erros)) {
-        foreach ($erros as $erro) {
-            echo "<li style = 'color: #FF0000'> $erro </li>";
-        }
-    }
-    if (!empty($nome) and !empty($img) and !empty($valor)) {
-        $produto = $_POST;
-        fopen('produtos.json', 'a+');
-        $produtosjson = file_get_contents('produtos.json');
-        $produtosarray = json_decode($produtosjson, true);
-        $produtosarray[] = $produto;
-        $contentjson = json_encode($produtosarray);
-        file_put_contents('produtos.json', $contentjson);
-    }
-}
+                if (!empty($erros)) {
+                    foreach ($erros as $erro) {
+                        echo "<li style = 'color: #FF0000'> $erro </li>";
+                    }
+                }
+
+                if (empty($erros)) {
+                    $produto = $_POST;
+                    salvaProduto($produto);
+
+                    header('Location: indexProdutos.php');
+                }
+            }
 
 
-?>
-            <form action="" method="post">
+            ?>
+            <form action="" method="post" enctype='multipart/form-data'>
                 <div class="row">
-                    <input type="hidden" name="id" value="">
                     <div class="col">
                         <span>Nome</span>
                         <input type="text" class="form-control" name="prodNome">

@@ -1,0 +1,37 @@
+[
+    {
+        "prodNome": "copo laranja de plastico",
+        "prodValor": "45.79",
+        "prodInfo": "copo + canudo",
+        "id": 2,
+        "prodImg": "200226191542_copo laranja.jpg"
+    },
+    {
+        "prodNome": "grampeador",
+        "prodValor": "4.5",
+        "prodInfo": "mini grampeador roxo",
+        "id": 3,
+        "prodImg": "200227002005_grampeador-roxo_285692.jpg"
+    },
+    {
+        "prodNome": "livro marrom - 230paginas",
+        "prodValor": "78",
+        "prodInfo": "capa dura",
+        "id": 4,
+        "prodImg": "200227044022_agenda laranja.png"
+    },
+    {
+        "prodNome": "mini caneta azul",
+        "prodValor": "2.5",
+        "prodInfo": "faber castell",
+        "id": 5,
+        "prodImg": "200227004453_caneta-azul.jpg"
+    },
+    {
+        "prodNome": "caderno verde",
+        "prodValor": "27",
+        "prodInfo": "",
+        "id": 6,
+        "prodImg": "200227004542_caderno verde -937.jpeg"
+    }
+]
